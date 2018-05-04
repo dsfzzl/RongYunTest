@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//添加如下代码，应用apt插件
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 26
@@ -24,8 +26,8 @@ android {
 
     sourceSets {
         main {
-            jni.srcDirs = []
             jniLibs.srcDirs = ['libs']
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
 }
@@ -55,4 +57,10 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
     compile 'io.reactivex.rxjava2:rxjava:2.x.x'
+
+
+    compile 'com.google.dagger:dagger:2.4'
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    //java注解
+    compile 'org.glassfish:javax.annotation:10.0-b28'
 }

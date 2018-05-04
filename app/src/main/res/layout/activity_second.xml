@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_get_books"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="getBooks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_get_book"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="getBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_set_book_price"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="setBookPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_add_book_in"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="addBookIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_add_book_out"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="addBookOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_add_book_inout"
+        android:background="#b1b19f"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="addBookInout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

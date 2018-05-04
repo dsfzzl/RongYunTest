@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/open"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="打开热点"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/state"
+        android:gravity="center"
+        android:text="wifi状态"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="创建wifi热点"
+        android:gravity="center"
+        android:id="@+id/create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="扫描"
+        android:gravity="center"
+        android:id="@+id/scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/lv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
