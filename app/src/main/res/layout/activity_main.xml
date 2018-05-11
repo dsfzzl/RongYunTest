@@ -12,7 +12,7 @@
         android:padding="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="get"
+        android:text="选择图片"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,10 +22,21 @@
         android:padding="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wifi"
+        android:text="获取Token"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_call"/>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/_102"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </android.support.constraint.ConstraintLayout>

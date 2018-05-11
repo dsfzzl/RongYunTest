@@ -4,6 +4,9 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by Administrator on 2018/4/11.
  */
@@ -16,6 +19,12 @@ public class MyApplication extends Application {
         super.onCreate();
         if (isMainProcess()) {   //当前进程是主进程时初始化
             //RongIM.init(this);
+
+            Logger.addLogAdapter(new AndroidLogAdapter() {
+                @Override public boolean isLoggable(int priority, String tag) {
+                    return BuildConfig.DEBUG;
+                }
+            });
         }
     }
 

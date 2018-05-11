@@ -7,9 +7,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 import com.rongyun.rongyuntest.bean.TestBean;
+import com.rongyun.rongyuntest.bean.TokenBean;
 import com.rongyun.rongyuntest.server.interceptor.CacheInterceptor;
 import com.rongyun.rongyuntest.server.param.LoginParams;
+import com.rongyun.rongyuntest.server.param.ParamsJianCheLian;
 import com.rongyun.rongyuntest.utils.StorageUtils;
 
 import java.io.File;
@@ -54,10 +57,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TestRetrofit {
     private static final int CONNECT_TIME_OUT = 600;
     private static final long CACHE_SIZE = 10*10*1024*1024;
+    private final static String TAG = "TestRetrofit";
+
+    public static TokenBean tokenBean;
 
     private  Retrofit mRetrofit;
     private  RetrofitInterface mRetrofitInterface;
     private Apiserver mApiserver;
+    private ApiBaiDu mApiBaiDu;
     private Context mContext;
 
 
@@ -73,18 +80,94 @@ public class TestRetrofit {
                 .build();
 
         mRetrofit = new Retrofit.Builder().baseUrl("http://api.sealtalk.im/")
-                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         mRetrofitInterface = mRetrofit.create(RetrofitInterface.class);
         //http://c.m.163.com/nc/article/headline/T1348647909107/60-20.html
         mRetrofit = new Retrofit.Builder().baseUrl("http://c.m.163.com/")
-                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         mApiserver = mRetrofit.create(Apiserver.class);
+
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("https://aip.baidubce.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        mApiBaiDu = mRetrofit.create(ApiBaiDu.class);
+    }
+
+    public void getToken() {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("grant_type","client_credentials");
+        params.put("client_id","YLUjkbnFGjDzDbdzhaU737hA");
+        params.put("client_secret","WIFTjGMfPFjCPBLF4jQsEHt8u9fCc0DS");
+
+        mApiBaiDu.getToken(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<TokenBean>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Response<TokenBean> responseBodyResponse) {
+                        tokenBean = responseBodyResponse.body();
+                            String string = responseBodyResponse.body().toString();
+                            Log.e("hhhh",string);
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    public void jianCheLian(String accessToken,String image) {
+        ParamsJianCheLian params = new ParamsJianCheLian(image);
+        Logger.t(TAG).d(params.toString());
+
+        mApiBaiDu.jianCheLianShuXin(accessToken,params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Response<ResponseBody> responseBodyResponse) {
+                        try {
+                            String string = responseBodyResponse.body().string();
+                            Logger.t(TAG).json(string);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
     public TestRetrofit(Context context,String baseUrl) {
         mContext = context;
